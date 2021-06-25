@@ -55,6 +55,18 @@ export default class Generator {
     // Assign random aircraft
     const randAircraft = aircraft[this.random(0, aircraft.length - 1)];
 
+    // Generate aircraft occupation seats
+    const randOccupied = this.random(randAircraft.passengerCapacity.total / 2, randAircraft.passengerCapacity.total - 1);
+    const genAvailable = randAircraft.passengerCapacity.total - randOccupied;
+    // Generate if cancelled
+    const isCancelledFloat = this.random(0, 1);
+    let isCancelledBool;
+    if (isCancelledFloat > 0.9625) {
+      isCancelledBool = true;
+    } else {
+      isCancelledBool = false;
+    }
+
     // Determine flight duration based on distance and aircraft speed
     const duration: FlightDuration = {
       locale: '',
@@ -76,6 +88,9 @@ export default class Generator {
       departureTime: departureTime.toISO(),
       arrivalTime: arrivalTime.toISO(),
       aircraft: randAircraft,
+      occupiedSeats: randOccupied,
+      availableSeats: genAvailable,
+      isCancelled: isCancelledBool,
     };
   }
 }
