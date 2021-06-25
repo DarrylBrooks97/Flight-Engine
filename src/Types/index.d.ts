@@ -31,10 +31,13 @@ declare interface FlightDuration {
 declare interface Flight {
   flightNumber: string;
   aircraft: Aircraft;
+  occupiedSeats: number;
+  availableSeats: number;
   origin: Airport;
   destination: Airport;
   distance: number;
   duration: FlightDuration;
+  isCancelled: boolean;
   departureTime: string;
   arrivalTime: string;
 }
